@@ -5,7 +5,7 @@ WORKDIR /django
 ENV PYTHONUNBUFFERED=1
 
 # Install netcat
-RUN apt-get update && apt-get install -y netcat
+# RUN apt-get update && apt-get install -y netcat
 
 RUN pip install --upgrade pip
 
