@@ -1,10 +1,10 @@
 #!/bin/sh
 #
-## Wait for the database to be ready
-#while ! nc -z $DATABASE_HOST 3306; do
-#  echo "Waiting for the MySQL database to be ready..."
-#  sleep 1
-#done
+# Wait for the database to be ready
+while ! nc -z $DATABASE_HOST 3306; do
+  echo "Waiting for the MySQL database to be ready..."
+  sleep 1
+done
 
 # Run migrations
 python manage.py makemigrations
