@@ -1,0 +1,143 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif, Ebrima, Ebrimabd;
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #079;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    text-decoration: none;
+    color: #fff;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown .dropbtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.user-dropdown .dropdown-content {
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.8s ease, max-height 1s ease;
+    min-width:200px;
+}
+
+.user-dropdown .dropdown-content a {
+    color: black;
+    padding: 6px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.user-dropdown:hover .dropdown-content {
+    opacity: 1;
+    max-height: 700px; /* Adjust this value as needed */
+}
+
+
+.container {
+    display: flex;
+    min-height: calc(100vh - 80px); /* Adjust for navbar and footer */
+
+}
+
+.sidebar {
+    background-color: #f4f4f4;
+    width: 20%;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+}
+.sidebar ul li .dropdown-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    padding-left: 20px;
+    transition: max-height 0.8s ease, opacity 0.5s ease;
+}
+
+.sidebar ul li .dropdown-content a {
+    background-color: transparent;
+    padding: 5px 10px;
+    display: block; /* Ensure the links are block elements */
+}
+
+.sidebar ul li:hover .dropdown-content {
+    max-height: 500px; /* Adjust this value as needed */
+    opacity: 1;
+}
+
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.footer {
+    text-align: center;
+    padding: 5px 5px;
+    background-color: #079;
+    color: white;
+}
+
+}
+
+
+@media (max-width: 768px) {
+    .base-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        width: 100%;
+        padding: 10px;
+    }
+}

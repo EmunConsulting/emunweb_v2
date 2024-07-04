@@ -1,0 +1,96 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 80%;
+    height: 400px;
+    margin: 1% auto;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    padding: 40px;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    transition: 0.5s;
+}
+
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+
+.information-wrapper{
+    width:100%;
+    margin-left:5px;
+}
+
+.information{
+    color: #fff;
+    width: 90%;
+    text-align: center;
+
+}
+
+
+
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'visa_application' %}">
+{% csrf_token %}
+
+<h3>ሓበሬታ</h3>
+
+<div class="information-wrapper">
+    <p class="information">መስርሕ ምሕታት ቪዛ ናብ ሃገረ ቤልጁም ትጅምር ኣለኻ። ክትቅጽል እንተደኣ መዲብካ፣ ብስምካ፣ ሓድሽ ቁጽሪ መሕተቲ ፎርም ዝተዋህቦ ፎርም ክዳለወልካ እዩ። ክትቅጽል ትደሊ ዲኻ፧
+</p>
+</div>
+
+<div class="btn-box">
+
+    <button class="button" type="button"><a href="{% url 'home' %}" style="text-decoration:none; color:#fff;">ንመለስ</a></button>
+<button type="submit">ንቐጽል</button>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}

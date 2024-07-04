@@ -1,0 +1,112 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 600px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+.button,
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+a,
+.button{
+    text-align: center;
+    color: #fff;
+    text-decoration:none;
+    padding:3;
+}
+
+
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'update_applicant_home_address' rec.application_number.id %}">
+{% csrf_token %}
+
+<div class="form-section" id="Form1">
+<h3>ህሉው ኣድራሻ</h3>
+<input type="text" name="application_number" value="{{ rec.application_number }}" readonly>
+<input name="street" type="text" placeholder="ጎደና" value="{{ rec.street }}" required>
+<input name="city" type="text" placeholder="ከተማ" value="{{ rec.city }}" required>
+<input name="country" type="text" placeholder="ሃገር" value="{{ rec.country }}" required>
+<input name="phone_number" type="text" placeholder="ቁጽሪ ተሌፎን" value="{% if rec.phone_number %}{{ rec.phone_number }}{%else%}{{traveler.phone_number}}{%endif%}" required>
+<input name="whatsapp_number" type="text" placeholder="ናይ ዋትስኣፕ ቁጽሪ" value="{% if rec.whatsapp_number %}{{ rec.whatsapp_number }}{%else%}{{traveler.whatsapp_number}}{%endif%}" required>
+<input name="email" type="text" placeholder="ኢመይል" value="{% if rec.email %}{{ rec.email }}{%else%}{{traveler.email}}{%endif%}" required>
+
+<div class="btn-box">
+<button type="submit">ዓቅብዮ</button>
+</div>
+<div class="button">
+<a href="{% url 'list_my_applications' %}">ከይዓቀብኪዮ ንመለስ</a>
+</div>
+</div>
+
+</form>
+
+</div>
+
+
+{% endblock %}

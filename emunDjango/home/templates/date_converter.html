@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopian to Gregorian Date Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .converter {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .converter input[type="number"] {
+            width: 80px;
+            padding: 8px;
+            margin-right: 10px;
+        }
+        .converter button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .converter button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="converter">
+    <h2>Ethiopian to Gregorian Date Converter</h2>
+    <div>
+        <label for="ethiopianYear">Year:</label>
+        <input type="number" id="ethiopianYear" placeholder="Year">
+    </div>
+    <div>
+        <label for="ethiopianMonth">Month:</label>
+        <input type="number" id="ethiopianMonth" placeholder="Month">
+    </div>
+    <div>
+        <label for="ethiopianDay">Day:</label>
+        <input type="number" id="ethiopianDay" placeholder="Day">
+    </div>
+    <button onclick="convertEthiopianToGregorian()">Convert</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function convertEthiopianToGregorian() {
+        const ethiopianYear = parseInt(document.getElementById('ethiopianYear').value);
+        const ethiopianMonth = parseInt(document.getElementById('ethiopianMonth').value);
+        const ethiopianDay = parseInt(document.getElementById('ethiopianDay').value);
+
+        const gregorianDate = ethiopianToGregorian(ethiopianYear, ethiopianMonth, ethiopianDay);
+        document.getElementById('result').innerText = gregorianDate;
+    }
+
+    function ethiopianToGregorian(ethiopianYear, ethiopianMonth, ethiopianDay) {
+        const offset = ethiopianMonth * 30 - 120 + ethiopianDay - ((ethiopianYear % 4 === 3) ? 22 : 23);
+        const gregorianYear = ethiopianYear + 8;
+        const gregorianDate = new Date(gregorianYear, 0, 1); // January 1st
+        gregorianDate.setDate(gregorianDate.getDate() + offset);
+        return gregorianDate.toDateString();
+    }
+</script>
+
+</body>
+</html>

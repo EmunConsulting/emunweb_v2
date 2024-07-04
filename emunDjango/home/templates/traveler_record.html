@@ -1,0 +1,108 @@
+{% extends  'base_wot_sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    መዝገብ ሓድሽ ኣካውንት
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+
+}
+
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+
+</style>
+
+<div class="form-wrapper">
+
+<form class="contact-form row" method="POST" action="{% url 'add_traveler_record'%}">
+{% csrf_token %}
+
+<div class="form-section">
+
+<h3>ተወሳኺ ሓበሬታ</h3>
+
+<input name="first_name" type="text" placeholder="ስም" required>
+<input name="middle_name" type="text" placeholder="ስም ኣቦ" required>
+<input name="last_name" type="text" placeholder="ስም ኣበሓጎ" required>
+<input name="passport_number" type="text" placeholder="ናይ ፓስፖርት ቁ./ስደተኛ መለለይ ቁ. " required>
+<input name="phone_number" type="text" placeholder="ቁጽሪ ተሌፎን" required>
+<input name="whatsapp_number" type="text" placeholder="ቁጽሪ ናይ ዋትሳፕ" required>
+<input name="email" type="email" placeholder="ኢመይል" value="{{user_email}}" required >
+
+<div class="btn-box">
+<button type="submit"> ዓቅብዮ</button>
+</div>
+</div>
+
+</form>
+
+</div>
+
+{% block script %}
+
+{% endblock %}
+
+{% endblock %}

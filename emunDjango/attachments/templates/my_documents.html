@@ -1,0 +1,196 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ደኩመንተይ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+
+table
+{
+    font-size:12px;
+}
+.sub-title-top{
+    font-size:16px;
+    color:#099;
+    font-weight:700;
+}
+
+.sub-title{
+    font-size:14px;
+    color:blue;
+}
+
+hr{
+    border: 3px solid #1679BF;
+}
+
+.divider{
+    border: 1px solid #1679BF;
+}
+
+.table th{
+    color:white;
+    background:#1679BF;
+    font-size:0.7rem;
+}
+.table
+{
+    font-size:0.7rem;
+}
+
+a
+{
+    text-decoration: none;
+    color:red;
+}
+
+</style>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:70%;">Document / ደኩመንት</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in ref_id %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.refugee_id.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.refugee_id.url }}" alt="Image for {{ i.refugee_id }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Refugee ID / ናይ ስደተኛ ካርድ</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_ref_id' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in fam_att %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.family_attestation.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.family_attestation.url }}" alt="Image for {{ i.family_attestation }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Family Attestation / ናይ ስድራ ወረቐት</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_fam_att' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in bir_cer %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.birth_certificate.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.birth_certificate.url }}" alt="Image for {{ i.birth_certificate }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Birth Certificate / ናይ ክብሪ መዝገብ</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_bir_cer' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in nat_id %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.national_id.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.national_id.url }}" alt="Image for {{ i.national_id }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>National ID / ናይ መንነት ካርድ</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_nat_id' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in wed_cer %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.wedding_certificate.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.wedding_certificate.url }}" alt="Image for {{ i.wedding_certificate }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Wedding Certificate / ናይ መርዓ ሰርትፊኬት</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_wed_cer' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in emb_doc %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.embassy_document.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.embassy_document.url }}" alt="Image for {{ i.embassy_document }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Embassy Document / ናይ ኤምባሲ ደኩመንት</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_wed_cer' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in med_doc %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.medical_document.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.medical_document.url }}" alt="Image for {{ i.medical_document }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Medical Document / ናይ ሕክምና ደኩመንት</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_med_doc' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for i in oth_doc %}
+        <tr>
+            <td>
+                <!-- Image displayed in the table, clickable to open in a new tab -->
+                <a href="{{ i.other_document.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.other_document.url }}" alt="Image for {{ i.other_document }}" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                </a>
+                <span>Other Document / ካልኦት ደኩመንት</span>
+            </td>
+            <td class="act" style="text-align:center; vertical-align:middle;">
+                <a href="{% url 'del_oth_doc' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}">Delete/ደምስስዮ</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+<hr class="divider">
+
+
+{% endblock %}

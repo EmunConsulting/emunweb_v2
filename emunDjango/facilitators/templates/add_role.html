@@ -1,0 +1,31 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Add Role
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Add Role</h1>
+
+ <div class="card-body">
+        <form class="contact-form row" method="POST" action="{% url 'add_role'%}">
+                    {% csrf_token %}
+
+            <div class="form-field col-lg-2">
+            <input name="role" class="input-text js-input" type="text" placeholder="Role" >
+            </div>
+
+
+            <div>
+                <button type="submit" name="save_stay" class="btn btn-primary">Save and Add New</button> &nbsp;
+                <button type="submit" name="save_redirect" class="btn btn-primary">Save and Return</button> &nbsp;
+                <button type="button" onclick="location.href='{% url 'role' %}'" class="btn btn-info" >ንመለስ</button>
+            </div>
+
+        </form>
+ </div>
+
+{% endblock %}

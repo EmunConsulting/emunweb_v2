@@ -1,0 +1,21 @@
+<div class="pagination" style="font-size:12px;">
+    <span class="step-links">
+        {% if data.has_previous %}
+            <a href="?page=1&recordsPerPage={{ recordsPerPage }}">&laquo; First Page</a>&nbsp;&nbsp;&nbsp;
+            <a href="?page={{ data.previous_page_number }}&recordsPerPage={{ recordsPerPage }}">Previous Page</a>&nbsp;&nbsp;&nbsp;
+        {% endif %}
+
+        <span class="current">
+            Page {{ data.number }} of {{ data.paginator.num_pages }}.
+        </span>&nbsp;&nbsp;&nbsp;
+
+        {% if data.has_next %}
+            <a href="?page={{ data.next_page_number }}&recordsPerPage={{ recordsPerPage }}">Next Page</a> &nbsp;&nbsp;&nbsp;
+            <a href="?page={{ data.paginator.num_pages }}&recordsPerPage={{ recordsPerPage }}">Last Page &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+

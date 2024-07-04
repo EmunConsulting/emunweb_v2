@@ -1,0 +1,68 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ጸብጻብ
+{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+
+hr{
+border: 3px solid #099;
+}
+
+.divider{
+border: 1px solid red;
+}
+
+.info{
+    font-size:12px;
+    margin-left:8px;
+}
+
+</style>
+
+<hr>
+
+
+<div class="content" style="display:flex; flex-flow:wrap; gap:3rem;">
+{% for i in info %}
+
+<div class="" style="width: 23rem; display:flex; flex-direction:row; justify-content:center; align-content:center; gap:0.5rem; margin-top:4px;">
+
+    {% for j in img %}
+    <div style="">
+    {% if i.user == j.user %}
+
+    <img src="{{ j.profile_image.url }}" alt="Profile Image" style=" width:100px; height:100px; border-radius: 50%; object-fit: cover;">
+        <div style="display:flex; justify-content:center; align-content:center;">
+            <span class="info"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;{{ i.user }}</span><br>
+        </div>
+    {% else %}
+    <img src="{% static 'images/costline.jpg' %}" alt="Profile Image" style=" width:100px; height:100px; border-radius: 50%; object-fit: cover;">
+        <div style="display:flex; justify-content:center; align-content:center;">
+            <span class="info"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;{{ i.user }}</span><br>
+        </div>
+    {%endif%}
+    </div>
+    {% endfor %}
+
+    <div style="align-content:center; width:100%; color:#fff; background:#099; border-radius:30px; height:75%; margin-top:12px;">
+
+        <span class="info">{{ i.first_name }} {{ i.middle_name }} {{ i.last_name }}</span><br>
+        <span class="info"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;{{ i.phone_number }}</span>&nbsp;||
+        <span class="info"><i class="fa-solid fa-mobile"></i>&nbsp;&nbsp;{{ i.whatsapp_number }}</span><br>
+        <span class="info"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;{{ i.email }}</span>
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

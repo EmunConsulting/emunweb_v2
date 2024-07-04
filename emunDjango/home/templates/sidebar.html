@@ -1,0 +1,36 @@
+{% load group_tags %}
+
+
+    <ul style="font-size:12px;">
+        <li><a href="{% url 'attach' %}">ደኩመንት ከረክብ</a></li>
+        <li><a href="{% url 'my_documents' %}">ዝተረከቡ ደኩመንት</a></li>
+        {% if user|has_group:"traveler" %}
+        <li class="dropdown">
+
+            <a href="#" class="dropbtn">ዝርዝር ኣገልግሎት</a>
+            <div class="dropdown-content">
+                <a href="{% url 'visa_application' %}">ምስላጥ ቪዛ ናይ ቤልጁም</a>
+                <a href="#">ምስላጥ ቪዛ ናይ ኤርትራ</a>
+            </div>
+        </li>
+        <li><a href="{% url 'list_my_applications' %}">ለውጢ ክገብር / ዘይተወድአ ክምልእ</a></li>
+        {% endif %}
+
+        {% if user|has_group:"admin" %}
+        <li><a href="{% url 'general_report' %}">ጸብጻብ</a></li>
+        <li><a href="{% url 'tasks_and_assignments' %}">መደባት ስራሕ</a></li>
+        <li><a href="{% url 'assigned_to_me' %}">ናባይ ዝተመደቡ ጉዳያት</a></li>
+        {% endif %}
+
+        {% if user|has_group:"moderator" %}
+        <li><a href="{% url 'general_report' %}">ጸብጻብ</a></li>
+        <li><a href="{% url 'tasks_and_assignments' %}">መደባት ስራሕ</a></li>
+        <li><a href="{% url 'assigned_to_me' %}">ናባይ ዝተደቡ ጉዳያት</a></li>
+        {% endif %}
+
+        {% if user|has_group:"facilitator" %}
+        <li><a href="{% url 'assigned_to_me' %}">ናባይ ዝተደቡ ጉዳያት</a></li>
+        {% endif %}
+
+    </ul>
+

@@ -1,0 +1,27 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Roles
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Roles</h1>
+</br>
+ <a href="{% url 'add_role' %}" class="btn btn-sm btn-info">Add Role</a> &nbsp&nbsp&nbsp
+
+</br>
+{% for role in data %}
+
+    {{ role.role }}
+
+    &nbsp&nbsp&nbsp <a href="{% url 'update_role' role.pk %}"><i class="fa-solid fa-list"></i></a> &nbsp&nbsp&nbsp
+    <a href="{% url 'delete_role' role.pk %}" class="delete-record-link" data-record-id="{{ role.pk }}"><i class="fa-solid fa-trash"></i></a> &nbsp&nbsp&nbsp
+
+    </br>
+
+{% endfor %}
+
+{% endblock %}

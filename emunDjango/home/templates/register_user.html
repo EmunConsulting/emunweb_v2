@@ -1,0 +1,146 @@
+{% extends 'base_wot_sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    መዝገብ ሓድሽ ኣካውንት
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .log-in-wrapper{
+    width: 360px;
+    height: 650px; /* Adjust height as needed */
+    margin: 2% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+.log-in-wrapper form{
+    width: 280px;
+    position: absolute;
+    top: 50px; /* Adjust position as needed */
+    left: 40px;
+}
+
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.alert {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 5px;
+}
+
+.alert p {
+    margin: 0;
+}
+</style>
+
+<div class="log-in-wrapper">
+
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+
+        <h3>መዝገብ ሓድሽ ኣካውንት</h3>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.username.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.password1.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.password2.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="btn-box">
+            <button type="submit">ሓድሽ ኣካውንት ክፈቲ</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

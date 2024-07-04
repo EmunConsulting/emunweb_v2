@@ -1,0 +1,45 @@
+{% extends  'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+
+
+{% block title %}
+    Forms
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Forms</h1>
+
+<table class="table table-striped table-hover table-bordered table-sm align-middle" style="font-size:0.7rem;">
+    <thead align="center">
+    <tr>
+        <th scope="col">Form ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Embassy</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for i in data %}
+    <tr>
+        <td>{{ i.form_id }}</td>
+        <td>
+                <a href="{{ i.form_name.url }}" download>
+                    {{ i.form_name.name|basename }}
+                </a>
+            </td>
+        <td>{{ i.description }}</td>
+        <td>{{ i.embassy }}</td>
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

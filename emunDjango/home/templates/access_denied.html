@@ -1,0 +1,31 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Access Denied
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+
+.hug
+{
+    display:flex;
+    flex:wrap;
+    gap: 4px;
+    color:var(--purple)
+}
+
+</style>
+
+<div class="hug">
+<div class="lock" ><i class="fa-solid fa-user-lock fa-4x"></i></div>
+<div class="message" style="margin-left: 8px;">
+  <span style="font-size:30px;">You have no permission to access this page</span><br>
+  <span class="sub">Please contact your administrator</span>
+</div>
+</div>
+
+{% endblock %}

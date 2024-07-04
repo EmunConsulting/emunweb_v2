@@ -1,0 +1,38 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Accounts
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Accounts</h1>
+
+<table class="table table-striped table-hover table-bordered table-sm align-middle" style="font-size:0.7rem;">
+    <thead align="center">
+    <tr>
+        <th scope="col">User</th>
+        <th scope="col">Role</th>
+        <th scope="col">Airtel No</th>
+        <th scope="col">MTN No</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for i in data %}
+    <tr>
+        <td>{{ i.user }}</td>
+        <td>{{ i.role }}</td>
+        <td>{{ i.airtel_number }}</td>
+        <td>{{ i.mtn_number }}</td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock %}

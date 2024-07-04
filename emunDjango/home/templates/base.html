@@ -1,0 +1,120 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font_css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <header class="navbar" >
+        {% include 'navbar.html' %}
+    </header>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-info alert-dismissible fade show position-fixed top-0 end-0 p-7" style="font-size:0.7rem;"
+             role="alert" id="alert-message">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+            // Close the alert after 3 seconds
+            setTimeout(function() {
+            document.getElementById('alert-message').style.display = 'none';
+            }, 2000);
+        </script>
+    {% endfor %}
+{% endif %}
+
+    <div class="base-container">
+
+        <nav class="sidebar">
+            {% include 'sidebar.html' %}
+        </nav>
+
+        <main class="content">
+            {% block content %}
+            <!-- Your form or content goes here -->
+            {% endblock %}
+        </main>
+
+    </div>
+
+    <footer class="footer">
+            {% include 'footer.html' %}
+    </footer>
+
+<!-- Include jQuery -->
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<!-- Include Bootstrap JavaScript at the end of your HTML, just before </body> -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+<script>
+
+    ====================  ALERT TIMER
+
+    // Wait for the page to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the alert element
+        const alert = document.querySelector('.alert');
+
+        // If an alert is present, set a timeout to close it after 7 seconds
+        if (alert) {
+            setTimeout(function() {
+                alert.classList.add('fade');
+                alert.classList.remove('show');
+            }, 7000);
+        }
+    });
+
+</script>
+
+<!-- JavaScript to confirm deleting  -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all delete record links
+        var deleteRecordLinks = document.querySelectorAll('.delete-record-link');
+
+        // Attach click event to each delete record link
+        deleteRecordLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                // Prevent the default link behavior
+                event.preventDefault();
+
+                // Get the record ID from the data attribute
+                var taskId = link.getAttribute('data-record-id');
+
+                // Display a confirmation popup
+                var result = confirm("ንኽትድምስስ መሪጽካ ኣለኻ። ርግጸኛ ዲኻ፧");
+
+                // If confirmed, proceed with the delete action
+                if (result) {
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+    });
+</script>
+
+
+{% block script %}
+
+{% endblock %}
+
+
+</body>
+</html>

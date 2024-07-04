@@ -1,0 +1,125 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ስራሕ መድብ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+
+}
+.button,
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+a,
+.button{
+    text-align: center;
+    color: #fff;
+    text-decoration:none;
+    padding:3;
+}
+
+</style>
+
+<div class="form-wrapper">
+
+<form class="contact-form row" method="POST" action="{% url 'assign_task' visa_app.application_number %}">
+{% csrf_token %}
+
+<div class="form-section">
+
+<h3>ስራሕ መድብ</h3>
+
+<input name="application_number" type="text" value="{{ visa_app.application_number }}" readonly>
+<input name="application_owner" type="text" value="{{ visa_app.application_owner.first_name }} {{ visa_app.application_owner.last_name }}" readonly>
+<input name="date_submitted" type="text" value="{{ visa_app.date_submitted }}" readonly>
+<input name="application_status" type="text" value="{% if visa_app.application_status == "1" %}ተረኪቡ/In{% elif visa_app.application_status == "2" %}ተመደቡ/As{% elif visa_app.application_status == "3" %}ኣብ መስርሕ/Pr{% elif visa_app.application_status == "4" %}ተዛዚሙ/Co{% elif visa_app.application_status == "5" %}ተሰሪዙ/Ca{% endif %}" readonly>
+
+<select name="assigned_officer">
+    <option value="" disabled selected style="color:yellow;">ነዚ ከሳልጥ ዝተመደበ ምረጽ</option> <!-- Placeholder option -->
+    {% for user in person %}
+        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+    {% endfor %}
+</select>
+
+<div class="btn-box">
+<button type="submit"> ዓቅብዮ</button>
+</div>
+
+<div class="button">
+<a href="{% url 'tasks_and_assignments' %}">ከይዓቀብኪዮ ንመለስ</a>
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+{% block script %}
+
+{% endblock %}
+
+{% endblock %}

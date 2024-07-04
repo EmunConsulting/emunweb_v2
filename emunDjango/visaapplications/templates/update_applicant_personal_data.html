@@ -1,0 +1,192 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 640px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+.button,
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+#Form2{
+    left: 450px;
+}
+
+.step-row{
+    width: 360px;
+    height: 5px;
+    margin: -10px auto;
+    display:flex;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+}
+
+.step-col{
+    width:180px;
+    text-align:center;
+    color:#333;
+    position:relative;
+}
+
+#progress{
+    position: absolute;
+    height:100%;
+    width: 180px;
+    background: linear-gradient(to right, #00FFFF, #00008B);
+    border-radius: 5px;
+    transition: 1s;
+}
+a,
+.button{
+    text-align: center;
+    color: #fff;
+    text-decoration:none;
+    padding:3;
+}
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'update_applicant_personal_data' rec.application_number.id %}">
+{% csrf_token %}
+
+<div class="form-section" id="Form1">
+<h3>ውልቃዊ ሓበሬታ</h3>
+<input type="text" name="application_number" value="{{ rec.application_number }}" readonly>
+<input name="first_name" type="text" placeholder="ስም" value="{% if rec.first_name %}{{rec.first_name}}{% else %}{{ traveler.first_name }}{%endif%}" required>
+<input name="middle_name" type="text" placeholder="ስም ኣቦ"  value="{% if rec.middle_name %}{{rec.middle_name}}{% else %}{{ traveler.middle_name }}{%endif%}" required>
+<input name="last_name" type="text" placeholder="ስም ኣበሓጎ" value="{% if rec.last_name %}{{rec.last_name}}{% else %}{{ traveler.last_name }}{%endif%}" required>
+<input name="date_of_birth" type="text" placeholder="ዝተወለድካሉ ዕለት" value="{{ rec.date_of_birth }}" required>
+<input name="month_of_birth" type="number" placeholder="ዝተወለድካሉ ወርሒ" value="{{ rec.month_of_birth }}" required>
+<input name="year_of_birth" type="number" placeholder="ዝተወለድካሉ ዓመት" value="{{ rec.year_of_birth }}" required>
+<input name="place_of_birth" type="text" placeholder="ዝተወለድካሉ ቦታ" value="{{ rec.place_of_birth }}" required >
+
+<div class="btn-box">
+<button type="button" id="Next1">ንቐጽል</button>
+</div>
+</div>
+
+<div class="form-section" id="Form2">
+<h3>ውልቃዊ ሓበሬታ</h3>
+
+<input name="country_of_birth" type="text" placeholder="ዝተወለድካሉ ሃገር" value="{{rec.country_of_birth}}" required >
+<input name="current_nationality" type="text" placeholder="ህሉው ዜግነት" value="{{rec.current_nationality}}" required >
+<input name="nationality_at_birth" type="text" placeholder="ዜግነት ኣብ እዋን ትውልዲ" value="{{rec.nationality_at_birth}}" required >
+
+<select name="sex" required>
+        <option value="" disabled selected style="color:yellow;">ጾታ ምረጽ</option> <!-- Placeholder option -->
+    {% for value, label in sex %}
+        <option value="{{ value }}" {% if rec.sex == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+</select>
+<input name="marital_status" type="text" placeholder="ኩነታት መርዓ" value="{{rec.marital_status}}" required >
+<input name="refugee_id" type="text" placeholder="ናይ ፓስፖርት / ስደተኛ መለለይ ቁጽሪ" value="{% if rec.passport_number %}{{rec.passport_number}}{% else %}{{ traveler.passport_number }}{% endif %}" required >
+<input name="current_occupation" type="text" placeholder="ህሉው ስራሕ" value="{{rec.current_occupation}}" required >
+
+<div class="btn-box">
+<button type="button" id="Back1">ንመለስ</button>
+<button type="submit">ዓቅብዮ</button>
+</div>
+<div class="button">
+<a href="{% url 'list_my_applications' %}" style="font-size:12px;">ለውጢ ከይዓቀብኪ ናብ ዝርዝር ንመለስ</a>
+</div>
+</div>
+
+</form>
+
+    <div class="step-row">
+        <div id="progress"></div>
+        <div class="step-col"></div>
+        <div class="step-col"></div>
+    </div>
+</div>
+
+{% block script %}
+<script>
+    var Form1 = document.getElementById("Form1");
+    var Form2 = document.getElementById("Form2");
+
+    var Next1 = document.getElementById("Next1");
+    var Back1 = document.getElementById("Back1");
+
+    var progress = document.getElementById("progress");
+
+    Next1.onclick = function(){
+    Form1.style.left = "-450px"
+    Form2.style.left = "40px"
+    progress.style.width = "360px"
+}
+
+    Back1.onclick = function(){
+    Form1.style.left = "40px"
+    Form2.style.left = "450px"
+    progress.style.width = "180px"
+}
+
+</script>
+{% endblock %}
+
+{% endblock %}

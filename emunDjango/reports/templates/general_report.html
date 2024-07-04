@@ -1,0 +1,103 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ጸብጻብ
+{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+
+table
+{
+    font-size:12px;
+}
+.sub-title-top{
+    font-size:16px;
+    color:var(--primary-color);
+    font-weight:700;
+}
+
+.sub-title{
+    font-size:14px;
+    color:var(--primary-color);
+}
+
+a{
+    text-decoration:none;
+}
+
+.table th{
+    color:white;
+    background:var(--primary-color);
+    font-size:0.7rem;
+}
+.table
+{
+    font-size:0.7rem;
+}
+</style>
+
+<hr>
+
+<p class="sub-title">ሓፈሻዊ ጸብጻብ</p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:70%;">Title / ኣርእስቲ</th>
+            <th>Total / ጠቕላላ ብዝሒ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>ተጠቀምቲ ናይዚ ሳይት</td>
+            <td>
+                <a href="{% url 'account_list' %}">
+                {{tra_rec}}
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>ዝሓተቱ ቪዛ</td>
+            <td>
+                <a href="{% url 'visa_application_list' %}">
+                {{visa_app}}
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding:3 30 ; color:#170;"> ተረኪቦም ግን ዘይተመደቡ</td>
+            <td style=color:#170;">{{ini}}</td>
+        </tr>
+
+        <tr>
+            <td style="padding:3 30 ; color:#170;"> ናብ ኣሳለጥቲ ዝተመደቡ</td>
+            <td style=color:#170;">{{ass}}</td>
+        </tr>
+
+        <tr>
+            <td style="padding:3 30 ; color:#170;"> ኣብ መስርሕ ዘለዉ</td>
+            <td style=color:#170;">{{inp}}</td>
+        </tr>
+
+        <tr>
+            <td style="padding:3 30 ; color:#170;"> ዝተዛዘሙ</td>
+            <td style=color:#170;">{{com}}</td>
+        </tr>
+
+        <tr>
+            <td style="padding:3 30 ; color:#170;"> ዝተሰረዙ</td>
+            <td style=color:#170;">{{can}}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,471 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Profile_info
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+
+table
+{
+    font-size:12px;
+}
+.sub-title-top{
+    font-size:16px;
+    color:#099;
+    font-weight:700;
+}
+
+.sub-title{
+    font-size:14px;
+    color:#099;
+}
+
+hr{
+border: 3px solid #099;
+}
+
+.divider{
+border: 1px solid green;
+}
+
+</style>
+
+<!-- New -->
+<hr>
+<h5>Personal Info / ውልቃዊ ሓበሬታ</h5>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>ስም ኣካውንት</td>
+            <td>{{user.username}}</td>
+        </tr>
+
+        <tr>
+            <td>ምሉእ ስም</td>
+            <td>{{info.first_name}} {{info.middle_name}} {{info.last_name}}</td>
+        </tr>
+
+        <tr>
+            <td>ናይ ፓስፖርት / ስደተኛ ቁ. </td>
+            <td>{{info.passport_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ቁጽሪ ተሌፎን</td>
+            <td>{{info.phone_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ናይ ዋትስኣፕ ቁጽሪ</td>
+            <td>{{info.whatsapp_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ኢመይል</td>
+            <td>{{info.email}}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<!-- New -->
+<hr>
+<h5> Visa Related Requests Made / ምስ ቪዛ ዝተኣሳሰሩ ዝቐረቡ ጠለባት</h5>
+
+{% for h in visa_app %}
+
+<p class="sub-title-top">ብ መለለይ ኮድ  <b>{{h.application_number}}</b> ዝተመዝገበ ጠለብ </p>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>መለለይ ቁ.</td>
+            <td>{{h.application_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ዝቐረበትሉ ዕለት</td>
+            <td>{{h.date_submitted}}</td>
+        </tr>
+
+        <tr>
+            <td>ህሉው ኩነታት</td>
+            <td>
+                {% if h.application_status == "1" %}
+                    ተረኪቡ/In
+                {% elif h.application_status == "2" %}
+                    ተመደቡ/As
+                {% elif h.application_status == "3" %}
+                    ኣብ መስርሕ/Pr
+                {% elif h.application_status == "4" %}
+                    ተዛዚሙ/Co
+                {% elif h.application_status == "5" %}
+                    ተሰሪዙ/Ca
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>ዝተመደበላ ኣሳላጢ</td>
+            <td>{{h.assigned_officer}}</td>
+        </tr>
+
+        <tr>
+            <td>ናይ ኣሳላጢ መልሲ</td>
+            <td>{{h.officer_notes}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- New -->
+<hr class="divider">
+<h5> Details / ዝርዝር ትሕዝቶ</h5>
+{% for i in per_data %}
+{% if i.application_number|stringformat:"s"|cut:" "|cut:"\t" == h.application_number|stringformat:"s"|cut:" "|cut:"\t" %}
+<p class="sub-title"><b>{{ i.application_number }}</b> | ውልቃዊ ሓበሬታ </p>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>መለለይ ቁ.</td>
+            <td>{{i.application_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ምሉእ ስም</td>
+            <td>{{i.first_name}} {{i.middle_name}} {{i.last_name}}</td>
+        </tr>
+
+        <tr>
+            <td>ዕለተ ትውልዲ (ዕለት/ወርሒ/ዓመት)</td>
+            <td>{{i.date_of_birth}}/{{i.month_of_birth}}/{{i.year_of_birth}}</td>
+        </tr>
+
+        <tr>
+            <td>ቦታ ትውልዲ</td>
+            <td>{{i.place_of_birth}}</td>
+        </tr>
+
+        <tr>
+            <td>ተወልደሉ ሃገር</td>
+            <td>{{i.country_of_birth}}</td>
+        </tr>
+
+        <tr>
+            <td>ህሉው ዜግነት</td>
+            <td>{{i.current_nationality}}</td>
+        </tr>
+
+        <tr>
+            <td>ዜግነት ኣብ እዋን ትውልዲ</td>
+            <td>{{i.nationality_at_birth}}</td>
+        </tr>
+
+        <tr>
+            <td>ጾታ</td>
+            <td>
+                {% if i.sex == "1" %}
+                    ተባ/M
+                {% elif i.sex == "2" %}
+                    ኣን/F
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>ኩነታት መርዓ</td>
+            <td>{{i.marital_status}}</td>
+        </tr>
+
+        <tr>
+            <td>ናይ ፓስፖርት/ስደተኛ መለለይ ቁ.</td>
+            <td>{{i.refugee_id}}</td>
+        </tr>
+
+        <tr>
+            <td>ህሉው ስራሕ</td>
+            <td>{{i.current_occupation}}</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+{% endfor %}
+
+<hr class="divider">
+
+{% for j in tra_doc %}
+{% if j.application_number|stringformat:"s"|cut:" "|cut:"\t" == h.application_number|stringformat:"s"|cut:" "|cut:"\t" %}
+<p class="sub-title"> <b>{{ j.application_number }}</b> | ደኩመንት </p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>ዓይነት ደኩመንት</td>
+            <td>{{j.document_type}}</td>
+        </tr>
+
+        <tr>
+            <td>ቁጽሪ ደኩመንት</td>
+            <td>{{j.document_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ዝተዋህበሉ ዕለተ</td>
+            <td>{{j.date_of_issue}}</td>
+        </tr>
+
+        <tr>
+            <td>ኣገልግሎት ዝብቅዓሉ ዕለት</td>
+            <td>{{j.valid_until}}</td>
+        </tr>
+
+        <tr>
+            <td>ነዚ ሰነድ ዝሃበ </td>
+            <td>{{j.issued_by}}</td>
+        </tr>
+
+        <tr>
+            <td>ዝተዋህበሉ ሃገር</td>
+            <td>{{j.issuing_country}}</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endif %}
+{% endfor %}
+
+<hr class="divider">
+
+{% for k in hom_add %}
+{% if k.application_number|stringformat:"s"|cut:" "|cut:"\t" == h.application_number|stringformat:"s"|cut:" "|cut:"\t" %}
+<p class="sub-title">{{ k.application_number }}</b> | ዝነብረሉ ቦታ </p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>ጎደና</td>
+            <td>{{k.street}}</td>
+        </tr>
+
+        <tr>
+            <td>ከተማ</td>
+            <td>{{k.city}}</td>
+        </tr>
+
+        <tr>
+            <td>ሃገር</td>
+            <td>{{k.country}}</td>
+        </tr>
+
+        <tr>
+            <td>ቁ. ተሌፎን</td>
+            <td>{{k.phone_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ናይ ዋትስኣፕ ቁ.</td>
+            <td>{{k.whatsapp_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ኢመይል</td>
+            <td>{{k.email}}</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endif %}
+{% endfor %}
+
+<hr class="divider">
+
+{% for l in tra_inf %}
+{% if l.application_number|stringformat:"s"|cut:" "|cut:"\t" == h.application_number|stringformat:"s"|cut:" "|cut:"\t" %}
+<p class="sub-title">{{ l.application_number }}</b> | ሓበሬታ ጉዕዞ </p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>ዓይነት ቪዛ</td>
+            <td>{{l.visa_type}}</td>
+        </tr>
+
+        <tr>
+            <td>ምኽንያት ጉዕዞ</td>
+            <td>{{l.main_purpose_of_journey}}</td>
+        </tr>
+
+        <tr>
+            <td>እትከዶ ቦታ</td>
+            <td>{{l.member_state_of_destination}}</td>
+        </tr>
+
+        <tr>
+            <td>መጀመርያ እትኣትወሉ</td>
+            <td>{{l.member_state_of_first_entry}}</td>
+        </tr>
+
+        <tr>
+            <td>ዘድሊ ብዝሒ ፍቓድ ንምእታው</td>
+            <td>{{l.number_of_entries_required}}</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endif %}
+{% endfor %}
+
+<hr class="divider">
+
+{% for m in ref %}
+{% if m.application_number|stringformat:"s"|cut:" "|cut:"\t" == h.application_number|stringformat:"s"|cut:" "|cut:"\t" %}
+<p class="sub-title">{{ m.application_number }}</b> | ሓበሬታ ተቐባሊ </p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:20%;">Title / ኣርእስቲ</th>
+            <th>Detail / መግለጺ</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>ተቐባሊ/እትኣትወሉ ቦታ</td>
+            <td>
+                {% if m.type == "1" %}
+                    ሰብ/Person
+                {% elif m.type == "2" %}
+                    ሆቴል/Hotel
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>ናይ ዘለዎ ሃገር ናይ ዜግንት መንንነት ኣለዎ'ዶ፧</td>
+            <td>
+                {% if m.has_national_id == "1" %}
+                    እወ/True
+                {% elif m.has_national_id == "2" %}
+                    ኣይፋል/False
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>እተሃልይዎ መለለይ ቁ.</td>
+            <td>{{m.national_registration_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ኣብ ዘለዎ ሃገር ዝጥቀመሉ አኩመንት መለለይ ቁ.</td>
+            <td>{{m.identity_document_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ስም</td>
+            <td>{{m.first_name}}</td>
+        </tr>
+
+        <tr>
+            <td>ስም ኣቦ</td>
+            <td>{{m.surname}}</td>
+        </tr>
+
+        <tr>
+            <td>ጾታ</td>
+            <td>
+                {% if m.gender == "1" %}
+                    ተባ/M
+                {% elif m.gender == "2" %}
+                    ኣን/F
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>ጎደና</td>
+            <td>{{m.street}}</td>
+        </tr>
+
+        <tr>
+            <td>ፖስታል ኮድ</td>
+            <td>{{m.postal_code}}</td>
+        </tr>
+
+        <tr>
+            <td>ከተማ</td>
+            <td>{{m.city}}</td>
+        </tr>
+
+        <tr>
+            <td>ሃገር</td>
+            <td>{{m.country}}</td>
+        </tr>
+
+        <tr>
+            <td>ቁ. ተሌፎን</td>
+            <td>{{m.telephone_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ቁ. ሞባይል</td>
+            <td>{{m.mobile_number}}</td>
+        </tr>
+
+        <tr>
+            <td>ኢመይል</td>
+            <td>{{m.email}}</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% endblock %}

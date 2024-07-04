@@ -1,0 +1,111 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+.button,
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+a,
+.button{
+    text-align: center;
+    color: #fff;
+    text-decoration:none;
+    padding:3;
+}
+
+
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'update_travel_information' rec.application_number.id %}">
+{% csrf_token %}
+
+<div class="form-section" id="Form1">
+<h3>ሓበሬታ ጉዕዞ</h3>
+<input type="text" name="application_number" value="{{ rec.application_number }}" readonly>
+<input name="visa_type" type="text" placeholder="ዓይነት ቪዛ" value="{{rec.visa_type}}" required>
+<input name="main_purpose_of_journey" type="text" placeholder="ዕላማ ጉዕዞ" value="{{rec.main_purpose_of_journey}}" required>
+<input name="member_state_of_destination" type="text" placeholder="እትኸዶ ዘሎካ ሃገር" value="{{rec.member_state_of_destination}}"  required>
+<input name="member_state_of_first_entry" type="text" placeholder="መጀመርያ እትኣትዎ ክፍሊ'ዛ ሃገር" value="{{rec.member_state_of_first_entry}}"  required>
+<input name="number_of_entries_required" type="text" placeholder="ዘድልየካ ብዝሒ መእተዊ ፍቓድ" value="{{rec.number_of_entries_required}}"  required>
+
+<div class="btn-box">
+<button type="submit">ዓቅብዮ</button>
+</div>
+<div class="button">
+<a href="{% url 'list_my_applications' %}" style="font-size:12px;">ለውጢ ከይዓቀብኪ ናብ ዝርዝር ንመለስ</a>
+</div>
+</div>
+
+</form>
+
+</div>
+
+
+{% endblock %}

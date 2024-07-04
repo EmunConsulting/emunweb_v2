@@ -1,0 +1,26 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Submit Form
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Submit Form</h1>
+
+
+
+ <form method="POST" action="{% url 'submit_form' %}">
+        <!-- Django CSRF token -->
+        {% csrf_token %}
+
+        <input type="file" name="attachment" required><br><br>
+
+        <textarea id="description" name="additional_note" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

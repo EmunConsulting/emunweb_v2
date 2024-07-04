@@ -1,0 +1,116 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ሓበሬታ መዝግቢ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+
+}
+.button,
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+a,
+.button{
+    text-align: center;
+    color: #fff;
+    text-decoration:none;
+    padding:3;
+}
+
+</style>
+
+<div class="form-wrapper">
+
+<form class="contact-form row" method="POST" action="{% url 'add_officer_note' visa_app.application_number %}">
+{% csrf_token %}
+
+<div class="form-section">
+
+<h3>ሓበሬታ ንጉዳይ <br><b>{{visa_app.application_number}}</b> ዝምልከት</h3>
+
+<div>
+<span style="color:white">ዋና ጉዳይ:  {{ visa_app.application_owner.first_name }} {{ visa_app.application_owner.last_name }}</span>
+</div>
+<br>
+<span style="color:yellow; font-size:10px;">ሓጺር ህሉው መግለጺ ብዛዕባ እዛ ጉዳይ ኣብ ከምይ ዝበለ ኩነታት ከም እትርከብ</span>
+<textarea name="officer_notes" style="background:transparent; color:white;" rows="5" cols="30">{{visa_app.officer_notes}}</textarea>
+
+<div class="btn-box">
+<button type="submit"> ዓቅብዮ</button>
+</div>
+<div class="button">
+<a href="{% url 'assigned_to_me' %}">ከይዓቀብኪዮ ንመለስ</a>
+</div>
+</div>
+
+</form>
+
+</div>
+
+{% block script %}
+
+{% endblock %}
+
+{% endblock %}

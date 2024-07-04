@@ -1,0 +1,87 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ናባይ ዝተመደቡ ጉዳያት
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+.table th{
+    color:white;
+    background:var(--primary-color);;
+    font-size:0.7rem;
+}
+.table
+{
+    font-size:0.7rem;
+}
+</style>
+
+
+<h5> Tasks assigned to me / ናባይ ዝተመደቡ ጉዳያት</h5>
+
+<table class="table table-striped table-hover table-bordered table-sm align-middle" style="font-size:0.7rem;">
+    <thead align="center">
+    <tr>
+        <th scope="col">መለለይ ቁጽሪ</th>
+        <th scope="col">ሓታቲ</th>
+        <th scope="col">ዘቕረበሉ ዕለት</th>
+        <th scope="col">ሕቶ ዝርከበሉ ኩነት</th>
+        <th scope="col">ከሳልጥ ዝተመደበ</th>
+        <th scope="col">ሓጺር መግለጺ ኣበናይ ኩነት ከምእትርከብ</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for i in visa_app %}
+    <tr>
+        <td>
+            <a href="{% url 'compiled_application' i.id %}">
+            {{ i.application_number }}
+            </a>
+        </td>
+        <td>{{ i.application_owner.first_name }} {{ i.application_owner.last_name }}</td>
+        <td>{{ i.date_submitted }}</td>
+        <td>
+                {% if i.application_status == "1" %}
+                    ተረኪቡ/In
+                {% elif i.application_status == "2" %}
+                    ተመደቡ/As
+                {% elif i.application_status == "3" %}
+                    ኣብ መስርሕ/Pr
+                {% elif i.application_status == "4" %}
+                    ተዛዚሙ/Co
+                {% elif i.application_status == "5" %}
+                    ተሰሪዙ/Ca
+                {% endif %}
+        </td>
+        <td>
+            {% if i.assigned_officer != None %}
+                <a href="{% url 'assign_task' i.application_number %}">
+                    {{ i.assigned_officer.first_name }} {{ i.assigned_officer.last_name }}
+                </a>
+            {% else %}
+                <a href="{% url 'assign_task' i.application_number %}">ሰብ መድበሉ</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if i.officer_notes != None %}
+                <a href="{% url 'assign_task' i.application_number %}">
+                    {{ i.officer_notes }}
+                </a>
+            {% else %}
+                <a href="{% url 'add_officer_note' i.application_number %}">ሓበሬታ ክጽሕፈሉ</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock %}

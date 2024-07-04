@@ -1,0 +1,30 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Update Role
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Update Role</h1>
+
+ <div class="card-body">
+        <form class="contact-form row" method="POST" action="{% url 'update_role' rec.pk %}">
+                    {% csrf_token %}
+
+            <div class="form-field col-lg-2">
+            <input name="role" class="input-text js-input" type="text" placeholder="Role" value="{{ rec.role }}">
+            </div>
+
+
+            <div>
+                <button type="submit" name="update" class="btn btn-primary">ነዚ ለውጢ ዓቅብዮ</button> &nbsp;
+                <button type="button" onclick="location.href='{% url 'role' %}'" class="btn btn-info" >ንመለስ</button>
+            </div>
+
+        </form>
+ </div>
+
+{% endblock %}

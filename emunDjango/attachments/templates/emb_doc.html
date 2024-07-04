@@ -1,0 +1,84 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Embassy Document / ናይ ኤምባሲ ደኩመንት
+{% endblock %}
+
+
+{% block content %}
+ <style>
+    .image-container {
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+    }
+    .image-container img {
+        border-radius: 10%;
+        object-fit: cover;
+        width: 200px;
+        height: 200px;
+    }
+    .image-container .close-icon {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: red;
+        cursor: pointer;
+        background-color: #fff;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    a{
+        text-decoration:none;
+    }
+</style>
+
+
+<hr>
+    <h5>Embassy Document / ናይ ኤምባሲ ደኩመንት</h5>
+
+    <div class="upload-container" >
+        <form id="uploadForm" style="display:flex;" enctype="multipart/form-data" method="POST" action="{% url 'add_emb_doc' %}">
+            {% csrf_token %}
+
+            <div class="file-input">
+                <input type="file" name="embassy_document" id="photo" accept="image/*" required>
+            </div>
+            <div>
+            <button type="submit">Upload/ጽዓኒ</button>
+            </div>
+            <div>
+            <button type="button" ><a href="{% url 'attach' %}">Cancel/ንመለስ</a></button>
+            </div>
+        </form>
+    </div>
+
+    <hr class="divider">
+
+    <h6>Previously Submitted / ኣቐዲሙ ዝተረከበ</h6>
+    <div class="image-wrapper">
+        {% for i in attachment %}
+            <div class="image-container">
+                <a href="{{ i.embassy_document.url }}" target="_blank" style="text-decoration:none;">
+                    <img src="{{ i.embassy_document.url }}" alt="Image for {{ i.embassy_document }}">
+                </a>
+                <span class="close-icon"><i class="fa-solid fa-xmark"></i></span>
+                <a href="{% url 'del_emb_doc' i.pk %}" class="close-icon delete-record-link" data-record-id="{{ i.pk }}"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+
+
+
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'applicant_travel_document' application_number%}">
+{% csrf_token %}
+
+<div class="form-section" id="Form1">
+<h3>መንቀሳቐሲ ኩመንት</h3>
+<input type="hidden" name="application_number" value="{{ application_number }}" readonly>
+<input name="document_type" type="text" placeholder="ዓይነት ደኩመንት" required>
+<input name="document_number" type="text" placeholder="ቁጽሪ ደመንት" required>
+<input name="date_of_issue" type="date" title="ዝተዋህበሉ ዕለት" required>
+<input name="valid_until" type="date" title="ኣገልግሎት ዘብቅዓሉ ዕለት" required>
+<input name="issued_by" type="text" placeholder="ወሃቢ ደኩመንት" required>
+<input name="issuing_country" type="text" placeholder="ዝተዋህበሉ ሃገር" required>
+
+<div class="btn-box">
+<button type="submit">ዓቅብዮ</button>
+</div>
+</div>
+
+</form>
+
+</div>
+
+
+{% endblock %}

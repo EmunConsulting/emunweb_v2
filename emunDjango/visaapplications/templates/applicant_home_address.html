@@ -1,0 +1,103 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+
+
+
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'applicant_home_address' application_number%}">
+{% csrf_token %}
+
+<div class="form-section" id="Form1">
+<h3>ህሉው ኣድራሻ</h3>
+<input type="hidden" name="application_number" value="{{ application_number }}" readonly>
+<input name="street" type="text" placeholder="ጎደና" required>
+<input name="city" type="text" placeholder="ከተማ" required>
+<input name="country" type="text" placeholder="ሃገር" required>
+<input name="phone_number" type="text" placeholder="ቁጽሪ ተሌፎን" value="{{ traveler.phone_number }}" required>
+<input name="whatsapp_number" type="text" placeholder="ናይ ዋትስኣፕ ቁጽሪ" value="{{ traveler.whatsapp_number }}" required>
+<input name="email" type="text" placeholder="ኢመይል" value="{{ traveler.email }}" required>
+
+<div class="btn-box">
+<button type="submit">ዓቅብዮ</button>
+</div>
+</div>
+
+</form>
+
+</div>
+
+
+{% endblock %}

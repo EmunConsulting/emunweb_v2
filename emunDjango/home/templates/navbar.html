@@ -1,0 +1,52 @@
+{% load static %}
+
+<div ><a class="logo" href="{% url 'home' %}">እሙን</a></div>
+
+{% if user.is_authenticated %}
+
+    <div class="user-dropdown">
+
+        <button class="dropdown-btn" style="text-align: right;">
+        {% if profile_image %}
+            <img src="{{ profile_image.profile_image.url }}" alt="Profile Image" style=" width:50px; height:50px; border-radius: 50%; object-fit: cover;">
+        {% else %}
+            <img src="{% static 'images/costline.jpg' %}" alt="Default Profile Image" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+        {% endif %}
+        </button>
+        <div class="dropdown-content" style="font-size:12px;">
+
+            <a href="{% url 'profile_info' %}">ፕሮፋይለይ ክፈትዮ</a>
+            <a href="{% url 'logout' %}">ኣካውንተይ ዕጸውዮ</a>
+<!--            <a href="{% url 'date_converter' %}">ዕለት ናብ ግእዝ ክቕይር</a> -->
+        </div>
+        <span style="font-size:10px;">{{user.first_name}} {{user.last_name}}</span>
+    </div>
+{% else %}
+    <div class="user-dropdown">
+        <button class="dropbtn">ኣብዚ ምረጽ</button>
+        <div class="dropdown-content">
+            <a href="{% url 'login' %}">ኣካውንተይ ክፈትዮ</a>
+            <a href="{% url 'register' %}">ሓድሽ ኣካውንት ክኸፍት</a>
+        </div>
+    </div>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdownBtn = document.querySelector('.dropdown-btn');
+        var dropdownContent = document.querySelector('.dropdown-content');
+
+        dropdownBtn.addEventListener('click', function() {
+            dropdownContent.classList.toggle('show');
+        });
+
+        // Optional: Close the dropdown if the user clicks outside of it
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown-btn')) {
+                if (dropdownContent.classList.contains('show')) {
+                    dropdownContent.classList.remove('show');
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,236 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    ፎርም መሕተቲ ቪዛ
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 600px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+.button,
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+#Form2{
+    left: 450px;
+}
+
+.step-row{
+    width: 360px;
+    height: 5px;
+    margin: -10px auto;
+    display:flex;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+}
+
+.step-col{
+    width:180px;
+    text-align:center;
+    color:#333;
+    position:relative;
+}
+
+#progress{
+    position: absolute;
+    height:100%;
+    width: 180px;
+    background: linear-gradient(to right, #00FFFF, #00008B);
+    border-radius: 5px;
+    transition: 1s;
+}
+
+a,
+.button{
+    text-align: center;
+    color: #fff;
+    text-decoration:none;
+    padding:3;
+}
+</style>
+
+<div class="form-wrapper">
+<form class="contact-form row" method="POST" action="{% url 'update_reference' rec.application_number.id %}">
+{% csrf_token %}
+
+<div class="form-section" id="Form1">
+<h3>ሓበሬታ ተቐባሊ</h3>
+
+<input type="text" name="application_number" value="{{ rec.application_number }}" readonly>
+
+<select name="type" required id="parent">
+    <option value="" disabled selected style="color:yellow;">ካብዞም ዝስዕቡ መን'ዩ ዝቕበለካ፧</option> <!-- Placeholder option -->
+    {% for value, label in type %}
+        <option value="{{ value }}" {% if rec.type == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+</select>
+
+<div id="dependant">
+
+    <select name="has_national_id" id="has_national_id">
+        <option value="" disabled selected style="color:yellow;">ናይታ ሃገር መንነት ኣለዎ'ዶ፧</option> <!-- Placeholder option -->
+        {% for value, label in has_national_id %}
+            <option value="{{ value }}" {% if rec.has_national_id == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+    <input name="national_registration_number" type="text" placeholder="ቁጽሪ ሃገራዊ መንነት" id="national_id_no" value="{{rec.national_registration_number}}">
+    <input name="identity_document_number" type="text" placeholder="ቁጽሪ መለለይ ደኩመንት" value="{{rec.identity_document_number}}">
+    <input name="first_name" type="text" placeholder="ስም" value="{{rec.first_name}}">
+    <input name="surname" type="text" placeholder="ስም ኣቦ" value="{{rec.surname}}" >
+
+    <select name="gender" >
+        <option value="" disabled selected style="color:yellow;">ጾታ ምረጽ</option> <!-- Placeholder option -->
+        {% for value, label in gender %}
+            <option value="{{ value }}" {% if rec.gender == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+</div>
+
+<div class="btn-box">
+<button type="button" id="Next1">ንቐጽል</button>
+</div>
+</div>
+
+<div class="form-section" id="Form2">
+<h3>ሓበሬታ ተቐባሊ</h3>
+
+<input name="street" type="text" placeholder="ጎደና" required value="{{rec.street}}">
+<input name="postal_code" type="text" placeholder="ፖስታል ኮድ" required value="{{rec.postal_code}}" >
+<input name="city" type="text" placeholder="ከተማ" required value="{{rec.city}}" >
+<input name="country" type="text" placeholder="ሃገር" required value="{{rec.country}}" >
+<input name="telephone_number" type="text" placeholder="ቁጽሪ ተሌፎን" required value="{{rec.telephone_number}}">
+<input name="mobile_number" type="text" placeholder="ቁጽሪ ሞባይል" required value="{{rec.mobile_number}}">
+<input name="email" type="text" placeholder="ኢመይል" required value="{{rec.email}}">
+
+
+<div class="btn-box">
+<button type="button" id="Back1">ንመለስ</button>
+<button type="submit">ዓቅብዮ</button>
+</div>
+<div class="button">
+<a href="{% url 'list_my_applications' %}" style="font-size:12px;">ለውጢ ከይዓቀብኪ ናብ ዝርዝር ንመለስ</a>
+</div>
+</div>
+
+</form>
+
+    <div class="step-row">
+        <div id="progress"></div>
+        <div class="step-col"></div>
+        <div class="step-col"></div>
+    </div>
+</div>
+
+{% block script %}
+<script>
+    var Form1 = document.getElementById("Form1");
+    var Form2 = document.getElementById("Form2");
+
+    var Next1 = document.getElementById("Next1");
+    var Back1 = document.getElementById("Back1");
+
+    var progress = document.getElementById("progress");
+
+    Next1.onclick = function(){
+    Form1.style.left = "-450px"
+    Form2.style.left = "40px"
+    progress.style.width = "360px"
+}
+
+    Back1.onclick = function(){
+    Form1.style.left = "40px"
+    Form2.style.left = "450px"
+    progress.style.width = "180px"
+}
+
+
+const parent = document.getElementById("parent")
+const dependant = document.getElementById("dependant")
+const has_national_id = document.getElementById("has_national_id")
+const national_id_no = document.getElementById("national_id_no")
+
+
+parent.addEventListener("change", function (event){
+    if (event.target.value == '2'){
+        dependant.style.display = "none"
+    }else if (event.target.value == '1'){
+        dependant.style.display = "block"
+    }
+})
+
+has_national_id.addEventListener("change", function (event){
+    if (event.target.value == '2'){
+        national_id_no.style.display = "none"
+    }else if (event.target.value == '1'){
+        national_id_no.style.display = "block"
+    }
+})
+
+
+</script>
+{% endblock %}
+
+{% endblock %}

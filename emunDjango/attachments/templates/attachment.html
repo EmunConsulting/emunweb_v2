@@ -1,0 +1,109 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Compiled Application
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+
+table
+{
+    font-size:12px;
+}
+.sub-title-top{
+    font-size:16px;
+    color:#099;
+    font-weight:700;
+}
+
+.sub-title{
+    font-size:14px;
+    color:#099;
+}
+
+.table th{
+    color:white;
+    background:#1679BF;
+    font-size:0.7rem;
+}
+.table
+{
+    font-size:0.7rem;
+}
+
+</style>
+
+<hr>
+<span>ጸብጻብ ናይ ተረኪቦም ዘለዉ ደኩመንትታትካ</span>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:70%;">Form / ፎርም</th>
+            <th style="width:20%;">Submitted Total/ዝተረክበ ብዝሒ</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>Refugee ID / ናይ ስደተኛ ካርድ</td>
+            <td>{{ref_id}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_ref_id' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+        <tr>
+            <td>Family Attestation / ፋሚሊ ኣተስቴሽን</td>
+            <td>{{fam_att}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_fam_att' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+        <tr>
+            <td>Birth Certificate / ናይ ክብሪ መዝገብ</td>
+            <td>{{bir_cer}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_bir_cer' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+        <tr>
+            <td>National ID / ናይ መንነት ታሴራ</td>
+            <td>{{nat_id}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_nat_id' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+        <tr>
+            <td>Wedding Certificate / ናይ መርዓ ሰርትፊኬት</td>
+            <td>{{wed_cer}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_wed_cer' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+
+        <tr>
+            <td>Embassy Document / ናይ ኤምባሲ ደኩመንት</td>
+            <td>{{emb_doc}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_emb_doc' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+        <tr>
+            <td>Medical Document / ናይ ሕክምና ደኩመንት</td>
+            <td>{{med_doc}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_med_doc' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+        <tr>
+            <td>Other Document / ካልእ ደኩመንት</td>
+            <td>{{oth_doc}}</td>
+            <td class="act" style="text-align:center; vertical-align:middle;"><a href="{% url 'add_oth_doc' %}" style="display:inline-block;">Add / የእትዊ</a></td>
+        </tr>
+
+
+
+
+    </tbody>
+</table>
+<hr class="divider">
+
+
+{% endblock %}

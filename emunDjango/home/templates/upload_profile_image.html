@@ -1,0 +1,145 @@
+{% extends  'base_wot_sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    መዝገብ ሓድሽ ኣካውንት
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+  .form-wrapper{
+    width: 360px;
+    height: 550px;
+    margin: 1% auto;
+    background: #079;
+    border-radius: 5px;
+    position: relative;
+    overflow:hidden;
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-section {
+    width: 280px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transition: 0.5s;
+}
+form select,
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+form select option{
+    background: #079;
+
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+
+}
+
+form button{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+#Form2{
+    left: 450px;
+}
+
+.step-row{
+    width: 360px;
+    height: 5px;
+    margin: -10px auto;
+    display:flex;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+}
+
+.step-col{
+    width:180px;
+    text-align:center;
+    color:#333;
+    position:relative;
+}
+
+#progress{
+    position: absolute;
+    height:100%;
+    width: 180px;
+    background: linear-gradient(to right, #00FFFF, #00008B);
+    border-radius: 5px;
+    transition: 1s;
+}
+
+
+input[type="file"]{
+    width: 250px;
+    height: 35px;
+    margin: 0 10px;
+    margin-top:30px;
+    background: transparent;
+    border-radius: 30px;
+    border: 1px solid #f5af09;
+    outline: none;
+    cursor: pointer;
+    color: #f5af09;
+    text-align: center;
+
+}
+
+</style>
+
+<div class="form-wrapper">
+
+<form class="contact-form row" method="post" enctype="multipart/form-data" action="{% url 'upload_profile_image' %}">
+{% csrf_token %}
+
+    <div class="form-section" >
+
+    <h3>ናይ ፕሮፋይል ስእሊ</h3>
+
+    <div>
+    <input type="file" id="file" name="profile_image" accept="image/*">
+    </div>
+
+    <div style="margin-top:10px;">
+    <button type="submit">ዓቅብዮ</button>
+    </div>
+    </div>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+    Compiled Application
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+
+table
+{
+    font-size:12px;
+}
+.sub-title-top{
+    font-size:16px;
+    color:#099;
+    font-weight:700;
+}
+
+.sub-title{
+    font-size:14px;
+    color:#099;
+}
+
+hr{
+border: 3px solid #099;
+}
+
+.divider{
+border: 1px solid green;
+}
+
+.table th{
+    color:white;
+    background:#099;
+    font-size:0.7rem;
+}
+.table
+{
+    font-size:0.7rem;
+}
+
+</style>
+<hr>
+{% for i in visa_app %}
+<span class="sub-title">ጉዳይ: ቪዛ ቁ. {{i.application_number}}</span>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width:80%;">Form / ፎርም</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ውልቃዊ ሓበሬታ</td>
+
+            <td><a href="{% url 'update_applicant_personal_data' i.id %}">ለውጢ ክገብር</a></td>
+        </tr>
+
+        <tr>
+            <td>ጉዳይ ደኩመንት</td>
+            <td><a href="{% url 'update_applicant_travel_document' i.id %}">ለውጢ ክገብር</a></td>
+        </tr>
+
+        <tr>
+            <td>ኣድራሻ</td>
+            <td><a href="{% url 'update_applicant_home_address' i.id %}">ለውጢ ክገብር</a></td>
+        </tr>
+
+        <tr>
+            <td>ጉዕዞ</td>
+            <td><a href="{% url 'update_travel_information' i.id %}">ለውጢ ክገብር</a></td>
+        </tr>
+
+        <tr>
+            <td>ተቐባሊ</td>
+            <td><a href="{% url 'update_reference' i.id %}">ለውጢ ክገብር</a></td>
+        </tr>
+    </tbody>
+</table>
+<hr class="divider">
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,24 @@
+
+{% extends  'base.html' %}
+{% load static %}
+
+{% block title %}
+  ቅድመ ገጽ
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <div id="carousel01" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'images/sunrise.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/costline.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
