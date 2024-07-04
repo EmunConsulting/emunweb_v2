@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Copy the entrypoint script and set the permissions
-COPY entrypoint.sh /emunDjango/entrypoint.sh
+COPY ./entrypoint.sh /emunDjango/entrypoint.sh
 RUN chmod +x /emunDjango/entrypoint.sh
 
 
