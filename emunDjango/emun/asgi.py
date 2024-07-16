@@ -8,9 +8,12 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 """
 
 import os
+from whitenoise import WhiteNoise
 
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'emun.settings')
 
 application = get_asgi_application()
+
+application = WhiteNoise(application, root='/home/xegai/emunweb/emunweb_v2/emunDjango/static/')
