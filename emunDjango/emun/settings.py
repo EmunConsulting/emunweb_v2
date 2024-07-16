@@ -135,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us','ti'
 
 TIME_ZONE = 'UTC'
 
@@ -155,7 +155,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = [os.path.join(BASE_DIR, 'static/'), '/home/xegai/emunweb/emunweb_v2/emunDjango/emunVenv/lib/python3/site-packages/django/contrib/admin/static']
 
 # Optional: Enable compression and caching
 WHITENOISE_USE_FINDERS = True
