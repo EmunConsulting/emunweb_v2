@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-rnq9=m#c_&yqc3c(jan9o5h5j=6^wvpyrd(ugfsqsdwa5)*^cr
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'emun', '164.92.245.213', '*']
+ALLOWED_HOSTS = ['161.35.192.27','emun','localhost','*']
 
 
 # Application definition
@@ -102,12 +102,12 @@ WSGI_APPLICATION = 'emun.wsgi.application'
 DATABASES = {
 
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':'emundb',
+        'USER': 'emun',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -147,12 +147,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = '/static/'
+#STATIC_ROOT = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # in use by django-debug-toolbar
 INTERNAL_IPS = [
