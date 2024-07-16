@@ -9,3 +9,4 @@ sqlparse
 tablib
 tzdata
 gunicorn
+psycopg2-binary
